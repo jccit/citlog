@@ -3,9 +3,9 @@ import { uglify } from "rollup-plugin-uglify";
 
 const config = core;
 config.output = [{
-    file: 'dist/citlog.min.js',
+    file: 'dist/clogit.min.js',
     format: 'umd',
-    name: 'citlog'
+    name: 'clogit'
 }];
 config.plugins.push(uglify());
 

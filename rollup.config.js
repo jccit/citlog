@@ -7,12 +7,12 @@ export default {
     input: 'src/index.ts',
     output: [
         {
-            file: 'dist/citlog.js',
+            file: 'dist/clogit.js',
             format: 'umd',
-            name: 'citlog'
+            name: 'clogit'
         },
         {
-            file: 'dist/citlog.esm.js',
+            file: 'dist/clogit.esm.js',
             format: 'es'
         }
     ],

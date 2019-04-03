@@ -1,8 +1,8 @@
-const citlog = require('citlog');
+const clogit = require('clogit');
 
-const logger = new citlog.Logger({
+const logger = new clogit.Logger({
     outputs: [
-        new citlog.output.Stdout()
+        new clogit.output.Stdout()
     ]
 });
 
