@@ -1,0 +1,16 @@
+{
+  "name": "citlog",
+  "version": "0.0.1",
+  "description": "Javascript logger",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "jccit",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  },
+  "devDependencies": {
+    "typescript": "^3.4.1"
+  }
+}
