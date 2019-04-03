@@ -1,9 +1,17 @@
 {
     "compilerOptions": {
+        "target": "esnext",
         "module": "commonjs",
-        "target": "es5",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "lib": ["es2016", "dom", "es5"],
         "declaration": true,
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "lib": [
+            "esnext",
+            "dom"
+        ]
     },
     "include": [
         "src/**/*"

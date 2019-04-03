@@ -1,5 +1,4 @@
 const citlog = require('citlog');
-console.log(citlog);
 
 const logger = new citlog.Logger({
     outputs: [
@@ -7,4 +6,5 @@ const logger = new citlog.Logger({
     ]
 });
 
-logger.info('Hi!', this);
+logger.info('Hello world!');
+logger.err('This is error');

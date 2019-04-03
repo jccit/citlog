@@ -1,5 +1,6 @@
 import Output from './interfaces/Output';
 import LoggerConfig from './interfaces/LoggerConfig';
+import LogMsgOptions from './interfaces/LogMsgOptions';
 import Severity from './enums/Severity';
 
 class Logger {
@@ -7,30 +8,37 @@ class Logger {
 
     constructor(config: LoggerConfig) {
         this.outputs = config.outputs;
-
-        this.log('Hello world');
     }
 
-    log(text: string, severity = Severity.Info, ...objects: Object[]) {
+    private sendToOutputs(text: string, date = new Date(), severity = Severity.Verbose, objects: Object[]) {
         for (const out of this.outputs) {
-            out.writeLine(text, new Date(), Severity.Verbose, objects);
+            out.writeLine(text, date, severity, objects);
         }
     }
 
+    log(config: LogMsgOptions, ...objects: Object[]) {
+        if (typeof config === 'string') {
+            this.err('Logger.log: You didn\'t pass a config object, did you mean to use Logger.info?')
+            return;
+        }
+
+        this.sendToOutputs(config.text, config.date, config.level, objects);
+    }
+
     info(text: string, ...objects: Object[]) {
-        this.log(text, Severity.Info, objects);
+        this.sendToOutputs(text, new Date(), Severity.Info, objects);
     }
 
     warn(text: string, ...objects: Object[]) {
-        this.log(text, Severity.Warning, objects);
+        this.sendToOutputs(text, new Date(), Severity.Warning, objects);
     }
 
     err(text: string, ...objects: Object[]) {
-        this.log(text, Severity.Error, objects);
+        this.sendToOutputs(text, new Date(), Severity.Error, objects);
     }
 
     verbose(text: string, ...objects: Object[]) {
-        this.log(text, Severity.Verbose, objects);
+        this.sendToOutputs(text, new Date(), Severity.Verbose, objects);
     }
 }
 

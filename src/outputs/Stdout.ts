@@ -14,6 +14,13 @@ class Stdout implements Output {
                 ...params,
                 ...objects
             ];
+
+            if (typeof window === 'undefined') {
+                // Running under node, flatten the array up to 3 times
+                // there's a weird bug where the argument array will
+                // always be wrapped in 3 arrays in nodejs
+                params = params.flat(3);
+            }
         }
 
         return params;
@@ -39,7 +46,7 @@ class Stdout implements Output {
         outputFunc.apply(this, params);
     }
 
-    writeLine(text: string, date: Date, level: Severity, ...objs: Object[]): void {
+    writeLine(text: string, date: Date, level: Severity, objs: Object[]): void {
         const out = this.buildString(text, date);
         const params = this.getParams(out, objs);
         this.consoleOut(params, level);

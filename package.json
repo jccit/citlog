@@ -2,15 +2,34 @@
   "name": "citlog",
   "version": "0.0.1",
   "description": "Javascript logger",
-  "main": "dist/index.js",
+  "main": "dist/citlog.js",
+  "browser": "dist/citlog.min.js",
+  "module": "dist/citlog.esm.js",
   "types": "dist/index.d.ts",
   "author": "jccit",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc -w"
+    "build": "concurrently \"npm run build:types\" \"npm run build:bundle && npm run build:browser\"",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:bundle": "rollup -c rollup.config.js",
+    "build:browser": "rollup -c rollup.min.config.js",
+    "dev": "rollup -c rollup.config.js -w",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-typescript": "^7.3.3",
+    "concurrently": "^4.1.0",
+    "rollup": "^1.8.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.3.3",
+    "rollup-plugin-local-resolve": "^1.0.7",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-uglify": "^6.0.2",
     "typescript": "^3.4.1"
   }
 }
