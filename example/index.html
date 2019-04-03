@@ -12,9 +12,7 @@
     <script>
         const log = new citlog.Logger({
             outputs: [
-                new citlog.output.Stdout({
-                    levels: citlog.Severity.All &~ citlog.Severity.Error
-                })
+                new citlog.output.Stdout()
             ]
         });
 

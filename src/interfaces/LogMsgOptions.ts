@@ -1,8 +1,25 @@
-import Severity from "../enums/Severity";
+import LogLevel from "../enums/LogLevel";
 
 interface LogMsgOptions {
+    /**
+     * Message contents
+     *
+     * @type {string}
+     */
     text: string
-    level: Severity,
+
+    /**
+     * Message log level
+     *
+     * @type {LogLevel}
+     */
+    level: LogLevel
+
+    /**
+     * Date and time of message
+     *
+     * @type {Date}
+     */
     date: Date
 };
 

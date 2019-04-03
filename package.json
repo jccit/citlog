@@ -14,7 +14,10 @@
     "build:bundle": "rollup -c rollup.config.js",
     "build:browser": "rollup -c rollup.min.config.js",
     "dev": "rollup -c rollup.config.js -w",
-    "type-check": "tsc --noEmit"
+    "docs": "typedoc --out docs src",
+    "type-check": "tsc --noEmit",
+    "test": "npm run type-check && npm run jest",
+    "jest": ""
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
@@ -31,6 +34,7 @@
     "rollup-plugin-local-resolve": "^1.0.7",
     "rollup-plugin-node-resolve": "^4.0.1",
     "rollup-plugin-uglify": "^6.0.2",
+    "typedoc": "^0.14.2",
     "typescript": "^3.4.1"
   }
 }

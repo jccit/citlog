@@ -1,7 +1,12 @@
-import Output from "../abstract/Output";
+import AbstractOutput from "../outputs/AbstractOutput";
 
 interface LoggerConfig {
-    outputs: Output[]
+    /**
+     * Should contain an array of output instances to log to
+     *
+     * @type {AbstractOutput[]}
+     */
+    outputs: AbstractOutput[]
 }
 
 export default LoggerConfig;

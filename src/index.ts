@@ -1,9 +1,9 @@
 import { default as Logger } from './Logger';
 import * as output from './outputs';
-import Severity from './enums/Severity';
+import LogLevel from './enums/LogLevel';
 
 export {
     Logger,
-    Severity,
+    LogLevel,
     output
 };

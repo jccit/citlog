@@ -1,4 +1,4 @@
-enum Severity {
+enum LogLevel {
     None    = 0,
     Verbose = 1 << 0,
     Info    = 1 << 1,
@@ -7,4 +7,4 @@ enum Severity {
     All     = ~(~0 << 4)
 }
 
-export default Severity;
+export default LogLevel;

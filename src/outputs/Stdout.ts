@@ -1,11 +1,11 @@
-import Output from '../abstract/Output';
-import Severity from '../enums/Severity';
+import AbstractOutput from './AbstractOutput';
+import LogLevel from '../enums/LogLevel';
 import OutputOptions from '../interfaces/OutputOptions';
 
-class Stdout extends Output {
+class Stdout extends AbstractOutput {
     constructor(options = <OutputOptions>{}) {
         super(options);
-        this.levels = options.levels || Severity.All;
+        this.levels = options.levels || LogLevel.All;
     }
 
     private buildString(text: string, date: Date): string {
@@ -25,19 +25,19 @@ class Stdout extends Output {
         return params;
     }
 
-    private consoleOut(params: any[], level: Severity): void {
+    private consoleOut(params: any[], level: LogLevel): void {
         let outputFunc = console.log;
 
         switch (level) {
-            case Severity.Info:
+            case LogLevel.Info:
                 outputFunc = console.info;
                 break;
 
-            case Severity.Error:
+            case LogLevel.Error:
                 outputFunc = console.error;
                 break;
 
-            case Severity.Warning:
+            case LogLevel.Warning:
                 outputFunc = console.warn;
                 break;
 
@@ -49,7 +49,7 @@ class Stdout extends Output {
         outputFunc.apply(this, params);
     }
 
-    writeLineToOutput(text: string, date: Date, level: Severity, objs: Object[]): void {
+    handleWrite(text: string, date: Date, level: LogLevel, objs: Object[]): void {
         const out = this.buildString(text, date);
         const params = this.getParams(out, objs);
         this.consoleOut(params, level);

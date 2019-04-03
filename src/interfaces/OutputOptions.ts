@@ -1,7 +1,13 @@
-import Severity from "../enums/Severity";
+import LogLevel from "../enums/LogLevel";
 
 interface OutputOptions {
-    levels?: Severity;
+    /**
+     * Optional. Flag representing all accepted log levels.
+     * By default, outputs will typically log all messages
+     *
+     * @type {LogLevel}
+     */
+    levels?: LogLevel;
 }
 
 export default OutputOptions;
