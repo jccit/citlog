@@ -1,4 +1,4 @@
-import Output from "./Output";
+import Output from "../abstract/Output";
 
 interface LoggerConfig {
     outputs: Output[]

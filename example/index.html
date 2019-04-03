@@ -7,6 +7,21 @@
     <title>Document</title>
 </head>
 <body>
+    <button onclick="window.arrggghhh()">Trigger error</button>
     <script src="../dist/citlog.js"></script>
+    <script>
+        const log = new citlog.Logger({
+            outputs: [
+                new citlog.output.Stdout({
+                    levels: citlog.Severity.All &~ citlog.Severity.Error
+                })
+            ]
+        });
+
+        window.onerror = function(msg, url, lineNo, columnNo, error) {
+            log.err(error);
+            return false;
+        }
+    </script>
 </body>
 </html>

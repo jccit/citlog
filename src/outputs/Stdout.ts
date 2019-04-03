@@ -1,12 +1,18 @@
-import Output from '../interfaces/Output';
+import Output from '../abstract/Output';
 import Severity from '../enums/Severity';
+import OutputOptions from '../interfaces/OutputOptions';
 
-class Stdout implements Output {
+class Stdout extends Output {
+    constructor(options = <OutputOptions>{}) {
+        super(options);
+        this.levels = options.levels || Severity.All;
+    }
+
     private buildString(text: string, date: Date): string {
         return text;
     }
 
-    private getParams(text: string, ...objects: Object[]): any[] {
+    private getParams(text: string, objects: Object[]): any[] {
         let params: any[] = [text];
 
         if (objects.length > 0) {
@@ -14,13 +20,6 @@ class Stdout implements Output {
                 ...params,
                 ...objects
             ];
-
-            if (typeof window === 'undefined') {
-                // Running under node, flatten the array up to 3 times
-                // there's a weird bug where the argument array will
-                // always be wrapped in 3 arrays in nodejs
-                params = params.flat(3);
-            }
         }
 
         return params;
@@ -38,6 +37,10 @@ class Stdout implements Output {
                 outputFunc = console.error;
                 break;
 
+            case Severity.Warning:
+                outputFunc = console.warn;
+                break;
+
             default:
                 outputFunc = console.log;
                 break;
@@ -46,7 +49,7 @@ class Stdout implements Output {
         outputFunc.apply(this, params);
     }
 
-    writeLine(text: string, date: Date, level: Severity, objs: Object[]): void {
+    writeLineToOutput(text: string, date: Date, level: Severity, objs: Object[]): void {
         const out = this.buildString(text, date);
         const params = this.getParams(out, objs);
         this.consoleOut(params, level);

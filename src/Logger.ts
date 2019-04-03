@@ -1,4 +1,4 @@
-import Output from './interfaces/Output';
+import Output from './abstract/Output';
 import LoggerConfig from './interfaces/LoggerConfig';
 import LogMsgOptions from './interfaces/LogMsgOptions';
 import Severity from './enums/Severity';
