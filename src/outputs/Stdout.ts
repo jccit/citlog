@@ -1,11 +1,11 @@
 import AbstractOutput from './AbstractOutput';
 import LogLevel from '../enums/LogLevel';
 import OutputOptions from '../interfaces/OutputOptions';
+import Message from '../interfaces/Message';
 
 class Stdout extends AbstractOutput {
     constructor(options = <OutputOptions>{}) {
         super(options);
-        this.levels = options.levels || LogLevel.All;
     }
 
     private buildString(text: string, date: Date): string {
@@ -49,10 +49,10 @@ class Stdout extends AbstractOutput {
         outputFunc.apply(this, params);
     }
 
-    handleWrite(text: string, date: Date, level: LogLevel, objs: Object[]): void {
-        const out = this.buildString(text, date);
-        const params = this.getParams(out, objs);
-        this.consoleOut(params, level);
+    handleWrite(message: Message): void {
+        const out = this.buildString(message.text, message.date);
+        const params = this.getParams(out, message.objects);
+        this.consoleOut(params, message.level);
     }
 }
 

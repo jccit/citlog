@@ -1,5 +1,6 @@
 import LogLevel from '../enums/LogLevel';
 import OutputOptions from '../interfaces/OutputOptions';
+import Message from '../interfaces/Message';
 
 abstract class AbstractOutput {
     /**
@@ -11,7 +12,7 @@ abstract class AbstractOutput {
     protected levels: LogLevel;
 
     constructor (options = <OutputOptions>{}) {
-
+        this.levels = options.levels || LogLevel.All;
     }
 
     /**
@@ -32,27 +33,21 @@ abstract class AbstractOutput {
      *
      * @protected
      * @abstract
-     * @param {string} text
-     * @param {Date} date
-     * @param {LogLevel} level
-     * @param {Object[]} objs
+     * @param {Message} message
      */
-    protected abstract handleWrite(text: string, date: Date, level: LogLevel, objs: Object[]): void;
+    protected abstract handleWrite(message: Message): void;
 
     /**
      * Public function for triggering a write.
      * Will make a call to shouldLog before sending the write request.
      *
-     * @param {string} text
-     * @param {Date} date
-     * @param {LogLevel} level
-     * @param {Object[]} objs
+     * @param {Message} message
      * @returns {void}
      */
-    writeLine(text: string, date: Date, level: LogLevel, objs: Object[]): void {
-        if (!this.shouldLog(level)) return;
+    writeLine(message: Message): void {
+        if (!this.shouldLog(message.level)) return;
 
-        this.handleWrite(text, date, level, objs);
+        this.handleWrite(message);
     };
 }
 

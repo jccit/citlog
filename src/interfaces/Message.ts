@@ -1,6 +1,6 @@
 import LogLevel from "../enums/LogLevel";
 
-interface LogMsgOptions {
+interface Message {
     /**
      * Message contents
      *
@@ -21,6 +21,13 @@ interface LogMsgOptions {
      * @type {Date}
      */
     date: Date
+
+    /**
+     * Stores an array of extra objects to print
+     *
+     * @type {Object[]}
+     */
+    objects?: Object[]
 };
 
-export default LogMsgOptions;
+export default Message;

@@ -1,6 +1,6 @@
 import AbstractOutput from './outputs/AbstractOutput';
 import LoggerConfig from './interfaces/LoggerConfig';
-import LogMsgOptions from './interfaces/LogMsgOptions';
+import Message from './interfaces/Message';
 import LogLevel from './enums/LogLevel';
 
 class Logger {
@@ -24,32 +24,12 @@ class Logger {
      * Sends a write request to each output as defined in 'outputs'
      *
      * @private
-     * @param {string} text
-     * @param {Date} [date=new Date()]
-     * @param {LogLevel} [level=LogLevel.Verbose]
-     * @param {Object[]} objects
+     * @param {Message} message
      */
-    private sendToOutputs(text: string, date = new Date(), level = LogLevel.Verbose, objects: Object[]) {
+    private sendToOutputs(message: Message) {
         for (const out of this.outputs) {
-            out.writeLine(text, date, level, objects);
+            out.writeLine(message);
         }
-    }
-
-    /**
-     * Core logging command. Set options in the config variable.
-     * Although you probably want one of the other, shorter, logging functions
-     *
-     * @param {LogMsgOptions} config
-     * @param {...Object[]} objects
-     * @returns {void}
-     */
-    log(config: LogMsgOptions, ...objects: Object[]): void {
-        if (typeof config === 'string') {
-            this.err('Logger.log: You didn\'t pass a config object, did you mean to use Logger.info?')
-            return;
-        }
-
-        this.sendToOutputs(config.text, config.date, config.level, objects);
     }
 
     /**
@@ -59,7 +39,12 @@ class Logger {
      * @param {...Object[]} objects
      */
     info(text: string, ...objects: Object[]) {
-        this.sendToOutputs(text, new Date(), LogLevel.Info, objects);
+        this.sendToOutputs({
+            text,
+            date: new Date(),
+            level: LogLevel.Info,
+            objects
+        });
     }
 
     /**
@@ -69,7 +54,12 @@ class Logger {
      * @param {...Object[]} objects
      */
     warn(text: string, ...objects: Object[]) {
-        this.sendToOutputs(text, new Date(), LogLevel.Warning, objects);
+        this.sendToOutputs({
+            text,
+            date: new Date(),
+            level: LogLevel.Warning,
+            objects
+        });
     }
 
     /**
@@ -79,7 +69,12 @@ class Logger {
      * @param {...Object[]} objects
      */
     err(text: string, ...objects: Object[]) {
-        this.sendToOutputs(text, new Date(), LogLevel.Error, objects);
+        this.sendToOutputs({
+            text,
+            date: new Date(),
+            level: LogLevel.Error,
+            objects
+        });
     }
 
     /**
@@ -89,7 +84,12 @@ class Logger {
      * @param {...Object[]} objects
      */
     verbose(text: string, ...objects: Object[]) {
-        this.sendToOutputs(text, new Date(), LogLevel.Verbose, objects);
+        this.sendToOutputs({
+            text,
+            date: new Date(),
+            level: LogLevel.Verbose,
+            objects
+        });
     }
 }
 
