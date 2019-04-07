@@ -35,12 +35,14 @@ class Logger {
     /**
      * Logs a message as info
      *
+     * @param {string} module
      * @param {string} text
      * @param {...Object[]} objects
      */
-    info(text: string, ...objects: Object[]) {
+    info(module: string, text: string, ...objects: Object[]) {
         this.sendToOutputs({
             text,
+            module,
             date: new Date(),
             level: LogLevel.Info,
             objects
@@ -50,12 +52,14 @@ class Logger {
     /**
      * Logs a warning message
      *
+     * @param {string} module
      * @param {string} text
      * @param {...Object[]} objects
      */
-    warn(text: string, ...objects: Object[]) {
+    warn(module: string, text: string, ...objects: Object[]) {
         this.sendToOutputs({
             text,
+            module,
             date: new Date(),
             level: LogLevel.Warning,
             objects
@@ -65,12 +69,14 @@ class Logger {
     /**
      * Logs an error
      *
+     * @param {string} module
      * @param {string} text
      * @param {...Object[]} objects
      */
-    err(text: string, ...objects: Object[]) {
+    err(module: string, text: string, ...objects: Object[]) {
         this.sendToOutputs({
             text,
+            module,
             date: new Date(),
             level: LogLevel.Error,
             objects
@@ -80,12 +86,14 @@ class Logger {
     /**
      * Logs a message as verbose. Use for debugging
      *
+     * @param {string} module
      * @param {string} text
      * @param {...Object[]} objects
      */
-    verbose(text: string, ...objects: Object[]) {
+    verbose(module: string, text: string, ...objects: Object[]) {
         this.sendToOutputs({
             text,
+            module,
             date: new Date(),
             level: LogLevel.Verbose,
             objects

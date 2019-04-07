@@ -9,6 +9,13 @@ interface Message {
     text: string
 
     /**
+     * Module name
+     * 
+     * @type {string}
+     */
+    module: string;
+
+    /**
      * Message log level
      *
      * @type {LogLevel}

@@ -15,6 +15,7 @@ class TestOutput extends AbstractOutput {
 beforeEach(() => {
     loggedMessage = {
         text: null,
+        module: null,
         level: null,
         date: new Date(),
         objects: []
@@ -33,17 +34,21 @@ test('init', () => {
 
 test('simple log', () => {
     const testString = 'Hello world';
-    log.info(testString);
+    const testModule = 'TestModule';
+    log.info(testModule, testString);
 
     expect(loggedMessage.text).toBe(testString);
+    expect(loggedMessage.module).toBe(testModule);
     expect(loggedMessage.level).toBe(LogLevel.Info);
 });
 
 test('logging objects', () => {
     const testString = 'Hello world';
+    const testModule = 'TestModule';
     const sampleObject = {hello: 'world'};
-    log.err(testString, sampleObject);
+    log.err(testModule, testString, sampleObject);
 
     expect(loggedMessage.text).toBe(testString);
+    expect(loggedMessage.module).toBe(testModule);
     expect(loggedMessage.objects).toEqual([sampleObject]);
 });

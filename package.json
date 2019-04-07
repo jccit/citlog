@@ -9,14 +9,14 @@
   "author": "jccit",
   "license": "MIT",
   "scripts": {
-    "build": "concurrently \"npm run build:types\" \"npm run build:bundle && npm run build:browser\" \"npm run docs\"",
+    "build": "concurrently \"yarn run build:types\" \"yarn run build:bundle && yarn run build:browser\" \"yarn run docs\"",
     "build:types": "tsc --emitDeclarationOnly",
     "build:bundle": "rollup -c rollup.config.js",
     "build:browser": "rollup -c rollup.min.config.js",
     "dev": "rollup -c rollup.config.js -w",
-    "docs": "typedoc --out docs src",
+    "docs": "typedoc --out docs/api src",
     "type-check": "tsc --noEmit",
-    "test": "npm run type-check && npm run jest",
+    "test": "yarn run type-check && yarn run jest",
     "jest": "jest"
   },
   "devDependencies": {

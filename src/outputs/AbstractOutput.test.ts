@@ -25,6 +25,7 @@ beforeAll(() => {
 beforeEach(() => {
     loggedMessage = {
         text: null,
+        module: null,
         level: null,
         date: new Date(),
         objects: []
@@ -33,19 +34,23 @@ beforeEach(() => {
 
 test('should log', () => {
     const testString = 'Hello world';
+    const testModule = 'TestModule';
     const sampleObject = {hello: 'world'};
-    log.err(testString, sampleObject);
+    log.err(testModule, testString, sampleObject);
 
     expect(loggedMessage.text).toBe(testString);
+    expect(loggedMessage.module).toBe(testModule);
     expect(loggedMessage.level).toBe(LogLevel.Error);
     expect(loggedMessage.objects).toEqual([sampleObject]);
 });
 
 test('shouldn\'t log', () => {
     const testString = 'Hello world';
+    const testModule = 'TestModule';
     const sampleObject = {hello: 'world'};
-    log.warn(testString, sampleObject);
+    log.warn(testModule, testString, sampleObject);
 
     expect(loggedMessage.text).toBeNull();
+    expect(loggedMessage.module).toBeNull();
     expect(loggedMessage.level).toBeNull();
 });

@@ -44,7 +44,7 @@ abstract class AbstractOutput {
      * @param {Message} message
      * @returns {void}
      */
-    writeLine(message: Message): void {
+    public writeLine(message: Message): void {
         if (!this.shouldLog(message.level)) return;
 
         this.handleWrite(message);

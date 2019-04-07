@@ -3,13 +3,13 @@ import LogLevel from '../enums/LogLevel';
 import OutputOptions from '../interfaces/OutputOptions';
 import Message from '../interfaces/Message';
 
-class Stdout extends AbstractOutput {
+class BrowserConsole extends AbstractOutput {
     constructor(options = <OutputOptions>{}) {
         super(options);
     }
 
-    private buildString(text: string, date: Date): string {
-        return text;
+    protected buildString(message: Message): string {
+        return `[${message.module}] ${message.text}`;
     }
 
     private getParams(text: string, objects: Object[]): any[] {
@@ -50,10 +50,10 @@ class Stdout extends AbstractOutput {
     }
 
     handleWrite(message: Message): void {
-        const out = this.buildString(message.text, message.date);
+        const out = this.buildString(message);
         const params = this.getParams(out, message.objects);
         this.consoleOut(params, message.level);
     }
 }
 
-export default Stdout;
+export default BrowserConsole;
