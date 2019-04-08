@@ -1,6 +1,6 @@
 import BrowserConsole from './BrowserConsole';
 import Message from '../interfaces/Message';
-import { LogLevel } from '..';
+import LogLevel from '../enums/LogLevel';
 
 class NodeConsole extends BrowserConsole {
     protected buildString(message: Message): string {
