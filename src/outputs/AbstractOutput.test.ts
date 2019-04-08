@@ -1,13 +1,13 @@
-import Logger from '../Logger';
-import AbstractOutput from './AbstractOutput';
-import LogLevel from '../enums/LogLevel';
-import Message from '../interfaces/Message';
+import LogLevel from "../enums/LogLevel";
+import IMessage from "../interfaces/Message";
+import Logger from "../Logger";
+import AbstractOutput from "./AbstractOutput";
 
 let log: Logger;
-let loggedMessage: Message;
+let loggedMessage: IMessage;
 
 class TestOutput extends AbstractOutput {
-    protected handleWrite(message: Message): void {
+    protected handleWrite(message: IMessage): void {
         loggedMessage = message;
     }
 }
@@ -16,26 +16,26 @@ beforeAll(() => {
     log = new Logger({
         outputs: [
             new TestOutput({
-                levels: LogLevel.Error
-            })
-        ]
+                levels: LogLevel.Error,
+            }),
+        ],
     });
 });
 
 beforeEach(() => {
     loggedMessage = {
-        text: null,
-        module: null,
-        level: null,
         date: new Date(),
-        objects: []
+        level: null,
+        module: null,
+        objects: [],
+        text: null,
     };
-})
+});
 
-test('should log', () => {
-    const testString = 'Hello world';
-    const testModule = 'TestModule';
-    const sampleObject = {hello: 'world'};
+test("should log", () => {
+    const testString = "Hello world";
+    const testModule = "TestModule";
+    const sampleObject = {hello: "world"};
     log.err(testModule, testString, sampleObject);
 
     expect(loggedMessage.text).toBe(testString);
@@ -44,10 +44,10 @@ test('should log', () => {
     expect(loggedMessage.objects).toEqual([sampleObject]);
 });
 
-test('shouldn\'t log', () => {
-    const testString = 'Hello world';
-    const testModule = 'TestModule';
-    const sampleObject = {hello: 'world'};
+test("shouldn't log", () => {
+    const testString = "Hello world";
+    const testModule = "TestModule";
+    const sampleObject = {hello: "world"};
     log.warn(testModule, testString, sampleObject);
 
     expect(loggedMessage.text).toBeNull();

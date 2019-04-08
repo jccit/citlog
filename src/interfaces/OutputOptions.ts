@@ -1,7 +1,7 @@
 import LogLevel from "../enums/LogLevel";
 import AbstractFormat from "../formats/AbstractFormat";
 
-interface OutputOptions {
+interface IOutputOptions {
     /**
      * Optional. Flag representing all accepted log levels.
      * By default, outputs will typically log all messages
@@ -18,4 +18,4 @@ interface OutputOptions {
     format?: AbstractFormat;
 }
 
-export default OutputOptions;
+export default IOutputOptions;

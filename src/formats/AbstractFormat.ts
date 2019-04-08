@@ -1,7 +1,7 @@
-import Message from "../interfaces/Message";
+import IMessage from "../interfaces/Message";
 
 abstract class AbstractFormat {
-    public abstract formatMessage(message: Message): string
+    public abstract formatMessage(message: IMessage): string;
 }
 
 export default AbstractFormat;

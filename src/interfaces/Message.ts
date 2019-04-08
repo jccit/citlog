@@ -1,16 +1,16 @@
 import LogLevel from "../enums/LogLevel";
 
-interface Message {
+interface IMessage {
     /**
      * Message contents
      *
      * @type {string}
      */
-    text: string
+    text: string;
 
     /**
      * Module name
-     * 
+     *
      * @type {string}
      */
     module: string;
@@ -20,21 +20,21 @@ interface Message {
      *
      * @type {LogLevel}
      */
-    level: LogLevel
+    level: LogLevel;
 
     /**
      * Date and time of message
      *
      * @type {Date}
      */
-    date: Date
+    date: Date;
 
     /**
      * Stores an array of extra objects to print
      *
-     * @type {Object[]}
+     * @type {object[]}
      */
-    objects?: Object[]
-};
+    objects?: object[];
+}
 
-export default Message;
+export default IMessage;

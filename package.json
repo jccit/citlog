@@ -17,7 +17,8 @@
     "docs": "typedoc --out docs/api src",
     "type-check": "tsc --noEmit",
     "test": "yarn run type-check && yarn run jest",
-    "jest": "jest"
+    "jest": "jest",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
@@ -35,6 +36,7 @@
     "rollup-plugin-local-resolve": "^1.0.7",
     "rollup-plugin-node-resolve": "^4.0.1",
     "rollup-plugin-uglify": "^6.0.2",
+    "tslint": "^5.15.0",
     "typedoc": "^0.14.2",
     "typescript": "^3.4.1"
   }

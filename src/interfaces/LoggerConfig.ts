@@ -1,12 +1,12 @@
 import AbstractOutput from "../outputs/AbstractOutput";
 
-interface LoggerConfig {
+interface ILoggerConfig {
     /**
      * Should contain an array of output instances to log to
      *
      * @type {AbstractOutput[]}
      */
-    outputs: AbstractOutput[]
+    outputs: AbstractOutput[];
 }
 
-export default LoggerConfig;
+export default ILoggerConfig;

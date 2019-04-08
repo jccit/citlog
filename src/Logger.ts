@@ -1,7 +1,7 @@
-import AbstractOutput from './outputs/AbstractOutput';
-import LoggerConfig from './interfaces/LoggerConfig';
-import Message from './interfaces/Message';
-import LogLevel from './enums/LogLevel';
+import LogLevel from "./enums/LogLevel";
+import ILoggerConfig from "./interfaces/LoggerConfig";
+import IMessage from "./interfaces/Message";
+import AbstractOutput from "./outputs/AbstractOutput";
 
 class Logger {
     /**
@@ -14,22 +14,10 @@ class Logger {
 
     /**
      * Creates an instance of Logger.
-     * @param {LoggerConfig} config
+     * @param {ILoggerConfig} config
      */
-    constructor(config: LoggerConfig) {
+    constructor(config: ILoggerConfig) {
         this.outputs = config.outputs;
-    }
-
-    /**
-     * Sends a write request to each output as defined in 'outputs'
-     *
-     * @private
-     * @param {Message} message
-     */
-    private sendToOutputs(message: Message) {
-        for (const out of this.outputs) {
-            out.writeLine(message);
-        }
     }
 
     /**
@@ -37,15 +25,15 @@ class Logger {
      *
      * @param {string} module
      * @param {string} text
-     * @param {...Object[]} objects
+     * @param {...object[]} objects
      */
-    info(module: string, text: string, ...objects: Object[]) {
+    public info(module: string, text: string, ...objects: object[]) {
         this.sendToOutputs({
-            text,
-            module,
             date: new Date(),
             level: LogLevel.Info,
-            objects
+            module,
+            objects,
+            text,
         });
     }
 
@@ -54,15 +42,15 @@ class Logger {
      *
      * @param {string} module
      * @param {string} text
-     * @param {...Object[]} objects
+     * @param {...object[]} objects
      */
-    warn(module: string, text: string, ...objects: Object[]) {
+    public warn(module: string, text: string, ...objects: object[]) {
         this.sendToOutputs({
-            text,
-            module,
             date: new Date(),
             level: LogLevel.Warning,
-            objects
+            module,
+            objects,
+            text,
         });
     }
 
@@ -71,15 +59,15 @@ class Logger {
      *
      * @param {string} module
      * @param {string} text
-     * @param {...Object[]} objects
+     * @param {...object[]} objects
      */
-    err(module: string, text: string, ...objects: Object[]) {
+    public err(module: string, text: string, ...objects: object[]) {
         this.sendToOutputs({
-            text,
-            module,
             date: new Date(),
             level: LogLevel.Error,
-            objects
+            module,
+            objects,
+            text,
         });
     }
 
@@ -88,16 +76,28 @@ class Logger {
      *
      * @param {string} module
      * @param {string} text
-     * @param {...Object[]} objects
+     * @param {...object[]} objects
      */
-    verbose(module: string, text: string, ...objects: Object[]) {
+    public verbose(module: string, text: string, ...objects: object[]) {
         this.sendToOutputs({
-            text,
-            module,
             date: new Date(),
             level: LogLevel.Verbose,
-            objects
+            module,
+            objects,
+            text,
         });
+    }
+
+    /**
+     * Sends a write request to each output as defined in 'outputs'
+     *
+     * @private
+     * @param {IMessage} message
+     */
+    private sendToOutputs(message: IMessage) {
+        for (const out of this.outputs) {
+            out.writeLine(message);
+        }
     }
 }
 

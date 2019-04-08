@@ -1,8 +1,8 @@
+import IMessage from "../interfaces/Message";
 import AbstractFormat from "./AbstractFormat";
-import Message from "../interfaces/Message";
 
 class Simple extends AbstractFormat {
-    public formatMessage(message: Message): string {
+    public formatMessage(message: IMessage): string {
         return `[${message.module}] ${message.text}`;
     }
 }

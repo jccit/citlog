@@ -4,7 +4,7 @@ enum LogLevel {
     Info    = 1 << 1,
     Warning = 1 << 2,
     Error   = 1 << 3,
-    All     = ~(~0 << 4)
+    All     = ~(~0 << 4),
 }
 
 export default LogLevel;

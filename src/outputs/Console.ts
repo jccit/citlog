@@ -1,20 +1,25 @@
-import AbstractOutput from './AbstractOutput';
-import LogLevel from '../enums/LogLevel';
-import OutputOptions from '../interfaces/OutputOptions';
-import Message from '../interfaces/Message';
+import LogLevel from "../enums/LogLevel";
+import IMessage from "../interfaces/Message";
+import OutputOptions from "../interfaces/OutputOptions";
+import AbstractOutput from "./AbstractOutput";
 
 class BrowserConsole extends AbstractOutput {
-    constructor(options = <OutputOptions>{}) {
+    constructor(options = {} as OutputOptions) {
         super(options);
     }
 
-    private getParams(text: string, objects: Object[]): any[] {
+    public handleWrite(message: IMessage, formatted: string): void {
+        const params = this.getParams(formatted, message.objects);
+        this.consoleOut(params, message.level);
+    }
+
+    private getParams(text: string, objects: object[]): any[] {
         let params: any[] = [text];
 
         if (objects.length > 0) {
             params = [
                 ...params,
-                ...objects
+                ...objects,
             ];
         }
 
@@ -43,11 +48,6 @@ class BrowserConsole extends AbstractOutput {
         }
 
         outputFunc.apply(this, params);
-    }
-
-    handleWrite(message: Message, formatted: string): void {
-        const params = this.getParams(formatted, message.objects);
-        this.consoleOut(params, message.level);
     }
 }
 

@@ -1,40 +1,40 @@
-import Logger from './Logger';
-import AbstractOutput from './outputs/AbstractOutput';
-import LogLevel from './enums/LogLevel';
-import Message from './interfaces/Message';
+import LogLevel from "./enums/LogLevel";
+import IMessage from "./interfaces/Message";
+import Logger from "./Logger";
+import AbstractOutput from "./outputs/AbstractOutput";
 
 let log: Logger;
-let loggedMessage: Message;
+let loggedMessage: IMessage;
 
 class TestOutput extends AbstractOutput {
-    protected handleWrite(message: Message): void {
+    protected handleWrite(message: IMessage): void {
         loggedMessage = message;
     }
 }
 
 beforeEach(() => {
     loggedMessage = {
-        text: null,
-        module: null,
-        level: null,
         date: new Date(),
-        objects: []
+        level: null,
+        module: null,
+        objects: [],
+        text: null,
     };
-})
+});
 
-test('init', () => {
+test("init", () => {
     log = new Logger({
         outputs: [
-            new TestOutput()
-        ]
+            new TestOutput(),
+        ],
     });
 
     expect(log).toBeDefined();
 });
 
-test('simple log', () => {
-    const testString = 'Hello world';
-    const testModule = 'TestModule';
+test("simple log", () => {
+    const testString = "Hello world";
+    const testModule = "TestModule";
     log.info(testModule, testString);
 
     expect(loggedMessage.text).toBe(testString);
@@ -42,10 +42,10 @@ test('simple log', () => {
     expect(loggedMessage.level).toBe(LogLevel.Info);
 });
 
-test('logging objects', () => {
-    const testString = 'Hello world';
-    const testModule = 'TestModule';
-    const sampleObject = {hello: 'world'};
+test("logging objects", () => {
+    const testString = "Hello world";
+    const testModule = "TestModule";
+    const sampleObject = {hello: "world"};
     log.err(testModule, testString, sampleObject);
 
     expect(loggedMessage.text).toBe(testString);
