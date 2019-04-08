@@ -1,3 +1,5 @@
+![npm](https://img.shields.io/npm/v/clogit.svg)
+
 # clogit
 
 Simple JS logger.
