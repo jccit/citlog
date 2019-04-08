@@ -12,7 +12,9 @@
     <script>
         const log = new clogit.Logger({
             outputs: [
-                new clogit.output.BrowserConsole()
+                new clogit.output.Console({
+                    format: new clogit.format.Logcat()
+                })
             ]
         });
 

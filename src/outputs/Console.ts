@@ -8,10 +8,6 @@ class BrowserConsole extends AbstractOutput {
         super(options);
     }
 
-    protected buildString(message: Message): string {
-        return `[${message.module}] ${message.text}`;
-    }
-
     private getParams(text: string, objects: Object[]): any[] {
         let params: any[] = [text];
 
@@ -49,9 +45,8 @@ class BrowserConsole extends AbstractOutput {
         outputFunc.apply(this, params);
     }
 
-    handleWrite(message: Message): void {
-        const out = this.buildString(message);
-        const params = this.getParams(out, message.objects);
+    handleWrite(message: Message, formatted: string): void {
+        const params = this.getParams(formatted, message.objects);
         this.consoleOut(params, message.level);
     }
 }

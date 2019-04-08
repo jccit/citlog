@@ -1,2 +1,1 @@
-export { default as BrowserConsole } from './BrowserConsole';
-export { default as NodeConsole } from './NodeConsole';
+export { default as Console } from './Console';

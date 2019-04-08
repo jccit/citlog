@@ -1,4 +1,5 @@
 import LogLevel from "../enums/LogLevel";
+import AbstractFormat from "../formats/AbstractFormat";
 
 interface OutputOptions {
     /**
@@ -8,6 +9,13 @@ interface OutputOptions {
      * @type {LogLevel}
      */
     levels?: LogLevel;
+
+    /**
+     * Formatter to use before printing text
+     *
+     * @type {AbstractFormat}
+     */
+    format?: AbstractFormat;
 }
 
 export default OutputOptions;

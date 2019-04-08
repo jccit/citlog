@@ -1,6 +1,8 @@
 import LogLevel from '../enums/LogLevel';
 import OutputOptions from '../interfaces/OutputOptions';
 import Message from '../interfaces/Message';
+import AbstractFormat from '../formats/AbstractFormat';
+import Simple from '../formats/Simple';
 
 abstract class AbstractOutput {
     /**
@@ -11,8 +13,17 @@ abstract class AbstractOutput {
      */
     protected levels: LogLevel;
 
+    /**
+     * Formatter to be used before sending write request
+     *
+     * @private
+     * @type {AbstractFormat}
+     */
+    private formatter: AbstractFormat;
+
     constructor (options = <OutputOptions>{}) {
         this.levels = options.levels || LogLevel.All;
+        this.formatter = options.format || new Simple();
     }
 
     /**
@@ -34,8 +45,9 @@ abstract class AbstractOutput {
      * @protected
      * @abstract
      * @param {Message} message
+     * @param {string}  formatted
      */
-    protected abstract handleWrite(message: Message): void;
+    protected abstract handleWrite(message: Message, formatted: string): void;
 
     /**
      * Public function for triggering a write.
@@ -46,8 +58,9 @@ abstract class AbstractOutput {
      */
     public writeLine(message: Message): void {
         if (!this.shouldLog(message.level)) return;
+        const formatted = this.formatter.formatMessage(message);
 
-        this.handleWrite(message);
+        this.handleWrite(message, formatted);
     };
 }
 
